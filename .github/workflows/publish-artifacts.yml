@@ -1,0 +1,39 @@
+name: Publish completed build artifacts
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful build run artifact source
+        required: true
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.run_id }}
+          path: artifacts
+      - name: Publish available packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir release-assets
+          find artifacts -type f ! -name 'builder-debug.yml' -exec cp {} release-assets/ \;
+          # Keep the default Windows update channel on x64.
+          if [ -f artifacts/windows-x64/latest.yml ]; then
+            cp artifacts/windows-x64/latest.yml release-assets/latest.yml
+          fi
+          gh release upload v1.7.7 release-assets/* --clobber
+          cat > notes.md <<'NOTES'
+          移除 OpenAI 和 Claude 请求转换中强制注入的 execution_discipline 提示词。
+          应用更新源已切换到 yang-sanmu/Kiro-account-manager。
+
+          已发布通过类型检查、编译和打包的 Windows、Linux 和 macOS x64 安装包。
+          macOS ARM64 构建仍在排队，完成后由主发布流程补齐。
+          NOTES
+          gh release edit v1.7.7 --draft=false --latest --notes-file notes.md
