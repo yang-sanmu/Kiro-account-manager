@@ -33,7 +33,6 @@ jobs:
           移除 OpenAI 和 Claude 请求转换中强制注入的 execution_discipline 提示词。
           应用更新源已切换到 yang-sanmu/Kiro-account-manager。
 
-          已发布通过类型检查、编译和打包的 Windows、Linux 和 macOS x64 安装包。
-          macOS ARM64 构建仍在排队，完成后由主发布流程补齐。
+          已发布通过类型检查、编译和打包的 Windows（x64、ia32、ARM64）、macOS（x64、ARM64）和 Linux（x64、ARM64、ARMv7）安装包。
           NOTES
           gh release edit v1.7.7 --draft=false --latest --notes-file notes.md
