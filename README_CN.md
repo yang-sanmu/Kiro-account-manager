@@ -293,6 +293,11 @@ npx electron-builder --linux --arm64
 ## 📋 更新日志
 
 
+### v1.7.7 (2026-11-03)
+
+- 移除 OpenAI 和 Claude 请求转换中强制注入的执行纪律提示词。
+- 应用更新源改为 yang-sanmu fork。
+
 ### v1.7.5 (2026-6-7) — 思考模式支持 + Enterprise profileArn 完整修复 + Agent 模式与 Steering + 工具调用泄漏修复
 
 #### 🧠 思考模式支持（Claude 4.6+）

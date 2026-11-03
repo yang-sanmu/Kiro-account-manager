@@ -288,6 +288,11 @@ The project is configured with GitHub Actions workflow for auto building all pla
 ## 📋 Changelog
 
 
+### v1.7.7 (2026-11-03)
+
+- Remove forced execution discipline prompt injection from OpenAI and Claude request conversion.
+- Point application updates to the yang-sanmu fork.
+
 ### v1.7.5 (2026-6-7) — Thinking Mode + Enterprise profileArn Full Fix + Agent Mode & Steering + Tool Use Leak Fix
 
 #### 🧠 Thinking Mode Support (Claude 4.6+)
