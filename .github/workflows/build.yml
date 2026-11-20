@@ -295,12 +295,15 @@ jobs:
           ls -lh release-assets/
 
       - name: Create Release
+        if: github.repository == 'yang-sanmu/Kiro-account-manager' && github.ref == 'refs/heads/codex/verify-release-20261120'
         uses: softprops/action-gh-release@v1
         with:
-          name: Kiro Account Manager v${{ needs.get-version.outputs.version }}
-          tag_name: ${{ needs.get-version.outputs.tag_name }}
-          draft: false
-          prerelease: false
+          name: CI verification draft v${{ needs.get-version.outputs.version }}
+          tag_name: ${{ needs.get-version.outputs.tag_name }}-ci-check-20261120
+          target_commitish: ${{ github.sha }}
+          draft: true
+          prerelease: true
+          fail_on_unmatched_files: true
           generate_release_notes: false
           body: |
             ## 🌟 更新内容 | What's New
